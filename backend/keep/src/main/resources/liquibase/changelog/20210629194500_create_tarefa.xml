@@ -1,0 +1,53 @@
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="20210629194500-1" author="gustavo.zucolotto">
+        <createSequence sequenceName="seq_tarefa"/>
+    </changeSet>
+
+    <changeSet id="20210629194500-2" author="gustavo.zucolotto">
+        <createTable tableName="tarefa">
+            <column type="bigint" name="id">
+                <constraints primaryKey="true" primaryKeyName="pk_tarefa"/>
+            </column>
+
+            <column type="bigint" name="id_responsavel">
+                <constraints nullable="false"/>
+            </column>
+
+            <column type="varchar(255)" name="titulo">
+                <constraints nullable="false"/>
+            </column>
+
+            <column type="longvarchar" name="descricao"/>
+
+            <column type="varchar(31)" name="tipo">
+                <constraints nullable="false"/>
+            </column>
+
+            <column type="datetime" name="data_inicio_prevista">
+                <constraints nullable="false"/>
+            </column>
+
+            <column type="datetime" name="data_fim_prevista">
+                <constraints nullable="false"/>
+            </column>
+
+            <column type="integer" name="tempo_previsto"/>
+            <column type="integer" name="tempo_gasto"/>
+
+            <column type="datetime" name="data_inicio"/>
+            <column type="datetime" name="data_fim"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20210629194500-3" author="gustavo.zucolotto">
+        <addForeignKeyConstraint baseTableName="tarefa"
+                                 baseColumnNames="id_responsavel"
+                                 constraintName="fk_tarefa_responsavel"
+                                 referencedTableName="responsavel"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+</databaseChangeLog>

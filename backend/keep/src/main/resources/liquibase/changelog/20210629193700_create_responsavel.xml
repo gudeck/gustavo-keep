@@ -1,0 +1,36 @@
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="20210629193700-1" author="gustavo.zucolotto">
+        <createSequence sequenceName="seq_responsavel"/>
+    </changeSet>
+
+    <changeSet id="20210629193700-2" author="gustavo.zucolotto">
+        <createTable tableName="responsavel">
+            <column type="bigint" name="id">
+                <constraints primaryKey="true" primaryKeyName="pk_responsavel"/>
+            </column>
+
+            <column type="varchar(255)" name="nome">
+                <constraints nullable="false"/>
+            </column>
+
+            <column type="varchar(255)" name="email">
+                <constraints nullable="false"/>
+            </column>
+
+            <column type="date" name="data_nascimento">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20210629193700-3" author="gustavo.zucolotto" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <sql>
+            alter table responsavel add constraint chk_data_nascimento check (data_nascimento &lt; current_date)
+        </sql>
+    </changeSet>
+
+
+</databaseChangeLog>
