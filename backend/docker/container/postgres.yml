@@ -1,0 +1,9 @@
+services:
+  postgres:
+    image: postgres:11.5
+    environment:
+      POSTGRES_PASSWORD: admin
+      POSTGRES_USER: admin
+      POSTGRES_DB: keep-db
+    ports:
+      - 5432:5432
