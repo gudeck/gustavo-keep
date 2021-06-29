@@ -1,0 +1,5 @@
+services:
+  keep-postgres:
+    extends:
+      service: postgres
+      file: container/postgres.yml
