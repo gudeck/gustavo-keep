@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import java.time.LocalDateTime;
@@ -27,6 +28,7 @@ public class Tarefa {
     @SequenceGenerator(name = "seq_generator_tarefa", sequenceName = "seq_tarefa", allocationSize = 1)
     private Long id;
 
+    @JoinColumn(name = "id_responsavel")
     @ManyToOne(fetch = LAZY, optional = false)
     private Responsavel responsavel;
 

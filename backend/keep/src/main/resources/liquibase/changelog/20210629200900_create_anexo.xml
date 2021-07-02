@@ -3,34 +3,18 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
     <changeSet id="20210629200900-1" author="gustavo.zucolotto">
-        <createSequence sequenceName="seq_anexo"/>
-    </changeSet>
-
-    <changeSet id="20210629200900-2" author="gustavo.zucolotto">
         <createTable tableName="anexo">
-            <column type="bigint" name="id">
+            <column type="uuid" name="uuid">
                 <constraints primaryKey="true" primaryKeyName="pk_anexo"/>
             </column>
 
             <column type="bigint" name="id_tarefa">
                 <constraints nullable="false"/>
             </column>
-
-            <column type="varchar(255)" name="titulo">
-                <constraints nullable="false"/>
-            </column>
-
-            <column type="varchar(31)" name="extensao">
-                <constraints nullable="false"/>
-            </column>
-
-            <column type="varchar(63)" name="chave">
-                <constraints nullable="false"/>
-            </column>
         </createTable>
     </changeSet>
 
-    <changeSet id="20210629200900-3" author="gustavo.zucolotto">
+    <changeSet id="20210629200900-2" author="gustavo.zucolotto">
         <addForeignKeyConstraint baseTableName="anexo"
                                  baseColumnNames="id_tarefa"
                                  constraintName="fk_anexo_tarefa"
