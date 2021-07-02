@@ -5,4 +5,8 @@ spring:
     password: admin
   liquibase:
     change-log: classpath:liquibase/master.xml
-    drop-first: true
+  #    drop-first: true
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB

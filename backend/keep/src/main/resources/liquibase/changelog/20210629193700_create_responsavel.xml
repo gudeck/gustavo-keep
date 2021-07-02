@@ -26,11 +26,4 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="20210629193700-3" author="gustavo.zucolotto" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <sql>
-            alter table responsavel add constraint chk_data_nascimento check (data_nascimento &lt; current_date)
-        </sql>
-    </changeSet>
-
-
 </databaseChangeLog>
