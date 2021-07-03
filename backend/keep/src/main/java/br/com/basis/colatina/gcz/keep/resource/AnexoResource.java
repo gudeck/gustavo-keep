@@ -41,7 +41,7 @@ public class AnexoResource {
     }
 
     @GetMapping("/{uuid}")
-    public ResponseEntity<UUID> find(@PathVariable Long idTarefa, @PathVariable UUID uuid) {
+    public ResponseEntity<AnexoDTO> find(@PathVariable Long idTarefa, @PathVariable UUID uuid) {
         log.debug("Requisição rest para buscar um anexo da tarefa {} com o uuid: {}", idTarefa, uuid);
         return ResponseEntity.ok(anexoService.findByUuid(uuid));
     }

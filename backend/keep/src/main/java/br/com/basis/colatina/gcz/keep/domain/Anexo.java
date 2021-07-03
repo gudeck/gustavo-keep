@@ -16,9 +16,9 @@ import static javax.persistence.FetchType.LAZY;
 @Entity
 public class Anexo {
 
+    String nome;
     @Id
     private UUID uuid;
-
     @JoinColumn(name = "id_tarefa")
     @ManyToOne(fetch = LAZY, optional = false)
     private Tarefa tarefa;

@@ -19,6 +19,13 @@ public class TarefaService {
         tarefaRepository.deleteById(idTarefa);
     }
 
+    public boolean existsById(Long idTarefa) {
+        if (tarefaRepository.existsById(idTarefa)) {
+            return true;
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "registro.nao-encontrado");
+    }
+
     public TarefaDTO findById(Long idTarefa) {
         return tarefaRepository.findById(idTarefa)
                 .map(tarefaMapper::toDto)
