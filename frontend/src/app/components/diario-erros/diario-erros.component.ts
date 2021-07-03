@@ -5,7 +5,4 @@ import { Component } from '@angular/core';
     templateUrl: './diario-erros.component.html'
 })
 export class DiarioErrosComponent {
-
-    constructor() {
-    }
 }
