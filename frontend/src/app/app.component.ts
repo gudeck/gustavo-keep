@@ -174,19 +174,9 @@ export class AppComponent implements AfterViewInit, OnDestroy, OnInit {
         event.preventDefault();
     }
 
-    onMenuClick($event) {
+    onMenuClick() {
         this.menuClick = true;
         this.menuService.resetMenu = false;
-    }
-
-    onRightPanelButtonClick(event) {
-        this.rightPanelClick = true;
-        this.rightPanelActive = !this.rightPanelActive;
-        event.preventDefault();
-    }
-
-    onRightPanelClick() {
-        this.rightPanelClick = true;
     }
 
     onTopbarItemClick(event, item) {
@@ -207,10 +197,6 @@ export class AppComponent implements AfterViewInit, OnDestroy, OnInit {
 
         this.hideOverlayMenu();
 
-        event.preventDefault();
-    }
-
-    onTopbarSubItemClick(event) {
         event.preventDefault();
     }
 
@@ -260,8 +246,7 @@ export class AppComponent implements AfterViewInit, OnDestroy, OnInit {
 
             // Element.matches() -> https://developer.mozilla.org/en-US/docs/Web/API/Element/matches
             if (this.selectorMatches(target, '.ripplelink, .ui-button')) {
-                const element = target;
-                this.rippleEffect(element, e);
+                this.rippleEffect(target, e);
                 break;
             }
         }
