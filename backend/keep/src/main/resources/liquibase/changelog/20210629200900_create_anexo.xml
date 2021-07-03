@@ -11,6 +11,10 @@
             <column type="bigint" name="id_tarefa">
                 <constraints nullable="false"/>
             </column>
+
+            <column type="varchar(255)" name="nome">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
 
