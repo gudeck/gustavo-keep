@@ -5,9 +5,8 @@
 
     <groupId>br.com.basis.colatina.gcz</groupId>
     <artifactId>documento</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-
     <name>documento</name>
+
     <description>Projeto responsável pelo tratamento de documentos</description>
 
     <parent>
@@ -16,5 +15,17 @@
         <version>0.1.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
+
+    <properties>
+        <minio.version>8.2.2</minio.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+            <version>${minio.version}</version>
+        </dependency>
+    </dependencies>
 
 </project>
