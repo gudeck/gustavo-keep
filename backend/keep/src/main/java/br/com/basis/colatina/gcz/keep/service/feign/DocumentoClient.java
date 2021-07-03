@@ -11,7 +11,7 @@ import java.util.UUID;
 
 import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
 
-@FeignClient(name = "documentoClient", url = "localhost:8081/api/documento")
+@FeignClient(name = "documentoClient", url = "${application.module.documento}")
 public interface DocumentoClient {
 
     @PostMapping(consumes = {MULTIPART_FORM_DATA_VALUE})
