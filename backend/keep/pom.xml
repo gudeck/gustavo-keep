@@ -5,9 +5,8 @@
 
     <groupId>br.com.basis.colatina.gcz</groupId>
     <artifactId>keep</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-
     <name>keep</name>
+
     <description>Projeto responsável pelo domínio do sistema</description>
 
     <parent>
@@ -19,6 +18,8 @@
 
     <properties>
         <testcontainers.version>1.15.3</testcontainers.version>
+        <hibernate-validator.version>7.0.1.Final</hibernate-validator.version>
+        <spring-openfeign.version>3.0.2</spring-openfeign.version>
     </properties>
 
     <dependencies>
@@ -57,9 +58,15 @@
         </dependency>
 
         <dependency>
-            <groupId>org.hibernate</groupId>
+            <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>7.0.1.Final</version>
+            <version>${hibernate-validator.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <version>${spring-openfeign.version}</version>
         </dependency>
     </dependencies>
 
