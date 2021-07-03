@@ -1,0 +1,8 @@
+services:
+  elasticsearch:
+    image: elasticsearch:7.13.2
+    container_name: keep-elasticsearch
+    ports:
+      - 9200:9200
+    environment:
+      - "discovery.type=single-node"

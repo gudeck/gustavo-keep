@@ -7,3 +7,7 @@ services:
     extends:
       service: minio
       file: container/docker-compose-minio.yml
+  keep-elasticsearch:
+    extends:
+      service: elasticsearch
+      file: container/docker-compose-elasticsearch.yml
