@@ -1,2 +1,15 @@
 server:
   port: 8081
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+application:
+  minio:
+    url: http://localhost:9000/
+    bucket: documento
+    access-key: minio
+    secret-key: minio123
