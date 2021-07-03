@@ -1,4 +1,4 @@
-package br.com.basis.colatina.gcz.keep.config.propertie;
+package br.com.basis.colatina.gcz.keep.config.property;
 
 import lombok.Getter;
 import lombok.Setter;

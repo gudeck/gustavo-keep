@@ -1,6 +1,6 @@
 package br.com.basis.colatina.gcz.documento.config;
 
-import br.com.basis.colatina.gcz.documento.config.propertie.ApplicationProperties;
+import br.com.basis.colatina.gcz.documento.config.property.ApplicationProperties;
 import io.minio.BucketExistsArgs;
 import io.minio.MakeBucketArgs;
 import io.minio.MinioClient;
