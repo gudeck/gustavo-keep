@@ -1,4 +1,4 @@
-package br.com.basis.colatina.gcz.documento.config.propertie;
+package br.com.basis.colatina.gcz.keep.config.property;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,6 +11,6 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "application")
 public class ApplicationProperties {
 
-    private MinioProperties minio;
+    private ElasticsearchProperties elasticsearch;
 
 }

@@ -1,6 +1,6 @@
 package br.com.basis.colatina.gcz.keep.config;
 
-import br.com.basis.colatina.gcz.keep.config.propertie.ApplicationProperties;
+import br.com.basis.colatina.gcz.keep.config.property.ApplicationProperties;
 import lombok.RequiredArgsConstructor;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.context.annotation.Bean;

@@ -1,6 +1,6 @@
 package br.com.basis.colatina.gcz.documento.service.other;
 
-import br.com.basis.colatina.gcz.documento.config.propertie.ApplicationProperties;
+import br.com.basis.colatina.gcz.documento.config.property.ApplicationProperties;
 import io.minio.GetObjectArgs;
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
