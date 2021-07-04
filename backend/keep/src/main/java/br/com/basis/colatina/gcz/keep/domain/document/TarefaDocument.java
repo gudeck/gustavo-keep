@@ -24,6 +24,7 @@ public class TarefaDocument {
     @Id
     private Long id;
     private Long idResponsavel;
+    private String nomeResponsavel;
     private String titulo;
     private TipoTarefaEnum tipo;
 

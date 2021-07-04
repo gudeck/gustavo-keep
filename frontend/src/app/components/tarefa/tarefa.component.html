@@ -1,0 +1,29 @@
+<p-table #tableTarefas (onPage)="findAllTarefas()" [(selection)]="tarefaSelecionada" [lazy]="true" [paginator]="true"
+         [responsive]="true" [rowsPerPageOptions]="[20,40,60]" [rows]="20" [totalRecords]="tarefas.totalElements"
+         [value]="tarefas.content" dataKey="id" selectionMode="single" sortField="id">
+
+    <ng-template pTemplate="header">
+        <tr>
+            <th scope="col">Titulo</th>
+            <th scope="col">Responsável</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Início Previsto</th>
+            <th scope="col">Fim Previsto</th>
+            <th scope="col">Início</th>
+            <th scope="col">Fim</th>
+        </tr>
+    </ng-template>
+
+    <ng-template let-tarefa pTemplate="body">
+        <tr [pSelectableRow]="tarefa">
+            <td>{{tarefa.titulo}}</td>
+            <td>{{tarefa.nomeResponsavel}}</td>
+            <td>{{tarefa.tipo}}</td>
+            <td>{{tarefa.dataInicioPrevista | date: 'dd/MM/yyyy'}}</td>
+            <td>{{tarefa.dataFimPrevista | date: 'dd/MM/yyyy'}}</td>
+            <td>{{tarefa.dataInicio | date: 'dd/MM/yyyy'}}</td>
+            <td>{{tarefa.dataFim | date: 'dd/MM/yyyy'}}</td>
+        </tr>
+    </ng-template>
+
+</p-table>

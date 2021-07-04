@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { DiarioErrosComponent } from './components/diario-erros/diario-erros.component';
 import { AppFooterComponent } from './components/footer/app.footer.component';
 import { ResponsavelComponent } from './components/responsavel/responsavel.component';
+import { TarefaComponent } from './components/tarefa/tarefa.component';
 import { AppTopbarComponent } from './components/topbar/app.topbar.component';
 import { SharedModule } from './shared/shared.module';
 
@@ -21,7 +22,8 @@ import { SharedModule } from './shared/shared.module';
         AppTopbarComponent,
         AppFooterComponent,
         DiarioErrosComponent,
-        ResponsavelComponent
+        ResponsavelComponent,
+        TarefaComponent
     ],
     imports: [
         BlockUIModule.forRoot({

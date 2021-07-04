@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, NgZone, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { MenuOrientation, MenusService } from '@nuvem/primeng-components';
+import { MenusService } from '@nuvem/primeng-components';
 import { ScrollPanel } from 'primeng';
 
 @Component({
@@ -88,10 +88,6 @@ export class AppComponent implements AfterViewInit, OnDestroy, OnInit {
         document.addEventListener('mousedown', this.rippleMouseDownListener, false);
     }
 
-    isDesktop() {
-        return window.innerWidth > this.viewMaxWidth;
-    }
-
     isMobile() {
         return window.innerWidth <= this.viewMinWidth;
     }
@@ -125,7 +121,9 @@ export class AppComponent implements AfterViewInit, OnDestroy, OnInit {
         });
 
         this.menuService.itens = [
-            { label: 'Dashboard', icon: 'dashboard', routerLink: ['/'] }
+            { label: 'Página Inicial', icon: 'home', routerLink: ['/'] },
+            { label: 'Responsaveis', icon: 'person', routerLink: ['/responsaveis'] },
+            { label: 'Tarefas', icon: 'assignment', routerLink: ['/tarefas'] }
         ];
     }
 
@@ -156,49 +154,12 @@ export class AppComponent implements AfterViewInit, OnDestroy, OnInit {
         this.rightPanelClick = false;
     }
 
-    onMenuButtonClick(event) {
-        this.menuClick = true;
-        this.rotateMenuButton = !this.rotateMenuButton;
-        this.topbarMenuActive = false;
-
-        if (this.menuService.layoutMode === MenuOrientation.OVERLAY) {
-            this.menuService.overlayMenuActive = !this.menuService.overlayMenuActive;
-        } else {
-            if (this.isDesktop()) {
-                this.menuService.staticMenuDesktopInactive = !this.menuService.staticMenuDesktopInactive;
-            } else {
-                this.menuService.staticMenuMobileActive = !this.menuService.staticMenuMobileActive;
-            }
-        }
-
-        event.preventDefault();
-    }
 
     onMenuClick() {
         this.menuClick = true;
         this.menuService.resetMenu = false;
     }
 
-    onTopbarItemClick(event, item) {
-        this.topbarItemClick = true;
-
-        if (this.activeTopbarItem === item) {
-            this.activeTopbarItem = null;
-        } else {
-            this.activeTopbarItem = item;
-        }
-
-        event.preventDefault();
-    }
-
-    onTopbarMenuButtonClick(event) {
-        this.topbarItemClick = true;
-        this.topbarMenuActive = !this.topbarMenuActive;
-
-        this.hideOverlayMenu();
-
-        event.preventDefault();
-    }
 
     removeClass(element: Element, className: string) {
         if (element.classList) {
