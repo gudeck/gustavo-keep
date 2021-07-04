@@ -1,9 +1,12 @@
 package br.com.basis.colatina.gcz.keep.resource;
 
+import br.com.basis.colatina.gcz.keep.domain.document.TarefaDocument;
 import br.com.basis.colatina.gcz.keep.service.TarefaService;
 import br.com.basis.colatina.gcz.keep.service.dto.TarefaDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,6 +45,12 @@ public class TarefaResource {
     public ResponseEntity<TarefaDTO> find(@PathVariable Long idTarefa) {
         log.debug("Requisição rest para buscar uma tarefa com o id: {}", idTarefa);
         return ResponseEntity.ok(tarefaService.findById(idTarefa));
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<TarefaDocument>> findAll(Pageable pageable) {
+        log.debug("Requisição rest para listar tarefas");
+        return ResponseEntity.ok(tarefaService.findAll(pageable));
     }
 
     @PutMapping

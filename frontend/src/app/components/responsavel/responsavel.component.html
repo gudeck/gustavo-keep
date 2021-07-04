@@ -1,1 +1,22 @@
-<p>responsavel works!</p>
+<p-table #tableResponsaveis (onPage)="findAllResponsaveis()" [(selection)]="responsavelSelecionado" [lazy]="true"
+         [paginator]="true" [responsive]="true" [rowsPerPageOptions]="[20,40,60]" [rows]="20"
+         [totalRecords]="responsaveis.totalElements" [value]="responsaveis.content" dataKey="id" selectionMode="single"
+         sortField="id">
+
+    <ng-template pTemplate="header">
+        <tr>
+            <th class="width-50-percent" scope="col">Nome</th>
+            <th class="width-30-percent" scope="col">Email</th>
+            <th class="width-20-percent" scope="col">Data de Nascimento</th>
+        </tr>
+    </ng-template>
+
+    <ng-template let-responsavel pTemplate="body">
+        <tr [pSelectableRow]="responsavel">
+            <td>{{responsavel.nome}}</td>
+            <td>{{responsavel.email}}</td>
+            <td>{{responsavel.dataNascimento | date: 'dd/MM/yyyy'}}</td>
+        </tr>
+    </ng-template>
+
+</p-table>
