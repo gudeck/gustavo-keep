@@ -12,7 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import static javax.persistence.EnumType.STRING;
 import static javax.persistence.FetchType.LAZY;
@@ -42,17 +42,17 @@ public class Tarefa {
     private TipoTarefaEnum tipo;
 
     @Column(nullable = false)
-    private LocalDate dataInicioPrevista;
+    private LocalDateTime dataInicioPrevista;
 
     @Column(nullable = false)
-    private LocalDate dataFimPrevista;
+    private LocalDateTime dataFimPrevista;
 
     private Integer tempoPrevisto;
 
     private Integer tempoGasto;
 
-    private LocalDate dataInicio;
+    private LocalDateTime dataInicio;
 
-    private LocalDate dataFim;
+    private LocalDateTime dataFim;
 
 }

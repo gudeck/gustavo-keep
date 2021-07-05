@@ -9,9 +9,9 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 
 import javax.persistence.Id;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-import static org.springframework.data.elasticsearch.annotations.DateFormat.basic_date;
+import static org.springframework.data.elasticsearch.annotations.DateFormat.date_hour_minute_second;
 import static org.springframework.data.elasticsearch.annotations.FieldType.Date;
 
 @Getter
@@ -28,16 +28,16 @@ public class TarefaDocument {
     private String titulo;
     private TipoTarefaEnum tipo;
 
-    @Field(type = Date, format = basic_date)
-    private LocalDate dataInicioPrevista;
+    @Field(type = Date, format = date_hour_minute_second)
+    private LocalDateTime dataInicioPrevista;
 
-    @Field(type = Date, format = basic_date)
-    private LocalDate dataFimPrevista;
+    @Field(type = Date, format = date_hour_minute_second)
+    private LocalDateTime dataFimPrevista;
 
-    @Field(type = Date, format = basic_date)
-    private LocalDate dataInicio;
+    @Field(type = Date, format = date_hour_minute_second)
+    private LocalDateTime dataInicio;
 
-    @Field(type = Date, format = basic_date)
-    private LocalDate dataFim;
+    @Field(type = Date, format = date_hour_minute_second)
+    private LocalDateTime dataFim;
 
 }
