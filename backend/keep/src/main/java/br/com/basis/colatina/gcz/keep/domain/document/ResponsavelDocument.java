@@ -1,6 +1,8 @@
 package br.com.basis.colatina.gcz.keep.domain.document;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
@@ -13,6 +15,8 @@ import static org.springframework.data.elasticsearch.annotations.FieldType.Date;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Document(indexName = "responsavel")
 public class ResponsavelDocument {
 

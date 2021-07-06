@@ -32,10 +32,7 @@ public class TarefaService {
 
     @Transactional(readOnly = true)
     public boolean existsById(Long idTarefa) {
-        if (tarefaRepository.existsById(idTarefa)) {
-            return true;
-        }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "registro.nao-encontrado");
+        return tarefaRepository.existsById(idTarefa);
     }
 
     public Page<TarefaDocument> findAll(Pageable pageable) {
