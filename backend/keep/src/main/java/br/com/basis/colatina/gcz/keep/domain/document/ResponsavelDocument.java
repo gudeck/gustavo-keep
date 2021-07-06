@@ -10,7 +10,7 @@ import org.springframework.data.elasticsearch.annotations.Field;
 import javax.persistence.Id;
 import java.time.LocalDate;
 
-import static org.springframework.data.elasticsearch.annotations.DateFormat.basic_date;
+import static org.springframework.data.elasticsearch.annotations.DateFormat.date;
 import static org.springframework.data.elasticsearch.annotations.FieldType.Date;
 
 @Getter
@@ -25,7 +25,7 @@ public class ResponsavelDocument {
     private String nome;
     private String email;
 
-    @Field(type = Date, format = basic_date)
+    @Field(type = Date, format = date)
     private LocalDate dataNascimento;
 
 }
