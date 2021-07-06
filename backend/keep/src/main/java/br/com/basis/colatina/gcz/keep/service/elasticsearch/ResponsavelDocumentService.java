@@ -4,7 +4,6 @@ import br.com.basis.colatina.gcz.keep.domain.document.ResponsavelDocument;
 import br.com.basis.colatina.gcz.keep.repository.ResponsavelRepository;
 import br.com.basis.colatina.gcz.keep.repository.elasticsearch.ResponsavelDocumentRepository;
 import br.com.basis.colatina.gcz.keep.service.event.ResponsavelEvent;
-import br.com.basis.colatina.gcz.keep.service.mapper.elasticsearch.ResponsavelDocumentMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,8 +15,6 @@ import org.springframework.transaction.event.TransactionalEventListener;
 @Service
 public class ResponsavelDocumentService {
 
-
-    private final ResponsavelDocumentMapper responsavelDocumentMapper;
     private final ResponsavelDocumentRepository responsavelDocumentRepository;
 
     private final ResponsavelRepository responsavelRepository;
@@ -31,8 +28,8 @@ public class ResponsavelDocumentService {
     public void indexResponsavel(ResponsavelEvent event) {
         var idEvent = event.getId();
 
-        responsavelRepository.findById(idEvent).ifPresentOrElse(
-                responsavel -> responsavelDocumentRepository.save(responsavelDocumentMapper.toDto(responsavel)),
+        responsavelRepository.getDocument(idEvent).ifPresentOrElse(
+                responsavelDocumentRepository::save,
                 () -> responsavelDocumentRepository.deleteById(idEvent));
     }
 
