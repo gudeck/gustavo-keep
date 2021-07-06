@@ -10,14 +10,11 @@ import org.springframework.data.elasticsearch.client.ClientConfiguration;
 import org.springframework.data.elasticsearch.client.RestClients;
 import org.springframework.data.elasticsearch.config.AbstractElasticsearchConfiguration;
 
-import java.io.IOException;
-
 @RequiredArgsConstructor
 @Configuration
 public class ElasticsearchConfiguration extends AbstractElasticsearchConfiguration {
 
     private final ApplicationProperties applicationProperties;
-
 
     @Override
     @NonNull
@@ -26,15 +23,8 @@ public class ElasticsearchConfiguration extends AbstractElasticsearchConfigurati
         final var clientConfiguration = ClientConfiguration.builder()
                 .connectedTo(applicationProperties.getElasticsearch().getUrl())
                 .build();
-        RestHighLevelClient restHighLevelClient = null;
 
-        try (var restClient = RestClients.create(clientConfiguration)) {
-            restHighLevelClient = restClient.rest();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return restHighLevelClient;
+        return RestClients.create(clientConfiguration).rest();
     }
 
 }
