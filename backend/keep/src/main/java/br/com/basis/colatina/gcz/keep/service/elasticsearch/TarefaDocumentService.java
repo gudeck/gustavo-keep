@@ -28,8 +28,8 @@ public class TarefaDocumentService {
     public void indexTarefa(TarefaEvent event) {
         var idEvent = event.getId();
 
-        tarefaRepository.findById(idEvent).ifPresentOrElse(
-                tarefa -> tarefaDocumentRepository.save(tarefaRepository.getDocument(idEvent)),
+        tarefaRepository.getDocument(idEvent).ifPresentOrElse(
+                tarefaDocumentRepository::save,
                 () -> tarefaDocumentRepository.deleteById(idEvent));
     }
 
