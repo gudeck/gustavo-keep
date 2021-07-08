@@ -14,24 +14,29 @@ export abstract class AbstractService {
         this.baseUrl = `${ environment.apiUrl }/${ resource }`;
     }
 
-    create<T>(data): Observable<T> {
-        return this.http.post<T>(`${ this.baseUrl }`, data);
+    create<T>(object: Object): Observable<T> {
+        return this.http.post<T>(`${ this.baseUrl }`, object);
     }
 
     delete(id: number | string): Observable<void> {
         return this.http.delete<void>(`${ this.baseUrl }/${ id }`);
     }
 
-    findAll<T>(tabelaTarefas: Table): Observable<T> {
-        return this.http.get<T>(`${ this.baseUrl }/`, { params: RequestUtil.getRequestParams(tabelaTarefas) });
+    filter<T>(object: Object, table: Table): Observable<T> {
+        return this.http.get<T>(`${ this.baseUrl }/filter`,
+            { params: RequestUtil.concatParams([RequestUtil.getFilterParams(object), RequestUtil.getTableParams(table)]) });
+    }
+
+    findAll<T>(table: Table): Observable<T> {
+        return this.http.get<T>(`${ this.baseUrl }/`, { params: RequestUtil.getTableParams(table) });
     }
 
     findById<T>(id: number | string): Observable<T> {
         return this.http.get<T>(`${ this.baseUrl }/${ id }`);
     }
 
-    update<T>(data): Observable<T> {
-        return this.http.put<T>(`${ this.baseUrl }`, data);
+    update<T>(object: Object): Observable<T> {
+        return this.http.put<T>(`${ this.baseUrl }`, object);
     }
 
 }

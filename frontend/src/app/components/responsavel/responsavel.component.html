@@ -1,22 +1,53 @@
-<p-table #tableResponsaveis (onPage)="findAllResponsaveis()" [(selection)]="responsavelSelecionado" [lazy]="true"
-         [paginator]="true" [responsive]="true" [rowsPerPageOptions]="[20,40,60]" [rows]="20"
-         [totalRecords]="responsaveis.totalElements" [value]="responsaveis.content" dataKey="id" selectionMode="single"
-         sortField="id">
+<p-card>
+    <div class="p-grid ui-fluid">
+        <div class="p-col-12">
+            <p-fieldset legend="Filtros">
+                <form #formFilter="ngForm" (ngSubmit)="search(formFilter)">
+                    <div class="ui-fluid p-formgrid p-grid p-align-center vertical-container">
+                        <div class="p-field p-lg-3 p-md-6 p-sm-12">
+                            <label for="inputNome">Nome</label>
+                            <input [(ngModel)]="responsavelFilter.nome" id="inputNome" name="nome" pInputText>
+                        </div>
+                        <div class="p-field p-lg-3 p-md-6 p-sm-12">
+                            <label for="inputEmail">Email</label>
+                            <input [(ngModel)]="responsavelFilter.email" id="inputEmail" name="email" pInputText>
+                        </div>
+                        <div class="p-field p-lg-3 p-md-6 p-sm-12">
+                            <label for="inputDataNascimento">Data de Nascimento</label>
+                            <input [(ngModel)]="responsavelFilter.dataNascimento" id="inputDataNascimento"
+                                   max="9999-12-31" name="dataNascimento" pInputText type="date">
+                        </div>
+                        <div class="p-lg-3 p-md-6 p-sm-12">
+                            <button icon="pi pi-search" label="Buscar" pButton></button>
+                        </div>
+                    </div>
+                </form>
+            </p-fieldset>
+        </div>
+        <div class="p-col-12">
+            <p-table #tableResponsaveis (onPage)="findAllResponsaveis()" [lazy]="true"
+                     [paginator]="true" [responsive]="true" [rowsPerPageOptions]="[20,40,60]" [rows]="20"
+                     [totalRecords]="responsaveis.totalElements" [value]="responsaveis.content" dataKey="id"
+                     selectionMode="single"
+                     sortField="id">
 
-    <ng-template pTemplate="header">
-        <tr>
-            <th class="width-50-percent" scope="col">Nome</th>
-            <th class="width-30-percent" scope="col">Email</th>
-            <th class="width-20-percent" scope="col">Data de Nascimento</th>
-        </tr>
-    </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th class="width-50-percent" scope="col">Nome</th>
+                        <th class="width-30-percent" scope="col">Email</th>
+                        <th class="width-20-percent" scope="col">Data de Nascimento</th>
+                    </tr>
+                </ng-template>
 
-    <ng-template let-responsavel pTemplate="body">
-        <tr [pSelectableRow]="responsavel">
-            <td>{{responsavel.nome}}</td>
-            <td>{{responsavel.email}}</td>
-            <td>{{responsavel.dataNascimento | date: 'dd/MM/yyyy'}}</td>
-        </tr>
-    </ng-template>
+                <ng-template let-responsavel pTemplate="body">
+                    <tr>
+                        <td>{{responsavel.nome}}</td>
+                        <td>{{responsavel.email}}</td>
+                        <td>{{responsavel.dataNascimento | date: 'dd/MM/yyyy'}}</td>
+                    </tr>
+                </ng-template>
 
-</p-table>
+            </p-table>
+        </div>
+    </div>
+</p-card>

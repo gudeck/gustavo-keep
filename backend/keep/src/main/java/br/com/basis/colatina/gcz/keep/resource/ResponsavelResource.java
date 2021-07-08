@@ -3,6 +3,8 @@ package br.com.basis.colatina.gcz.keep.resource;
 import br.com.basis.colatina.gcz.keep.domain.document.ResponsavelDocument;
 import br.com.basis.colatina.gcz.keep.service.ResponsavelService;
 import br.com.basis.colatina.gcz.keep.service.dto.ResponsavelDTO;
+import br.com.basis.colatina.gcz.keep.service.elasticsearch.ResponsavelDocumentService;
+import br.com.basis.colatina.gcz.keep.service.filter.ResponsavelFilter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -25,6 +27,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 public class ResponsavelResource {
 
     private final ResponsavelService responsavelService;
+    private final ResponsavelDocumentService responsavelDocumentService;
 
     @PostMapping
     public ResponseEntity<ResponsavelDTO> create(@RequestBody ResponsavelDTO responsavelDTO) {
@@ -51,6 +54,12 @@ public class ResponsavelResource {
     public ResponseEntity<Page<ResponsavelDocument>> findAll(Pageable pageable) {
         log.debug("Requisição rest para listar responsáveis");
         return ResponseEntity.ok(responsavelService.findAll(pageable));
+    }
+
+    @GetMapping("/filter")
+    public ResponseEntity<Page<ResponsavelDocument>> filter(ResponsavelFilter responsavelFilter, Pageable pageable) {
+        log.debug("Requisição rest para listar responsáveis");
+        return ResponseEntity.ok(responsavelDocumentService.filter(responsavelFilter, pageable));
     }
 
     @PutMapping

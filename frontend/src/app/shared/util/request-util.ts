@@ -3,8 +3,31 @@ import { Table } from 'primeng';
 
 export class RequestUtil {
 
-    static getRequestParams(table: Table): HttpParams {
-        let httpParams: HttpParams = new HttpParams();
+    static concatParams(params: HttpParams[]): HttpParams {
+        let newParams = new HttpParams();
+        params.forEach(param => {
+            param['updates']
+                .map(update => {
+                    return { param: update['param'], value: update['value'] };
+                })
+                .forEach((update: { param: string, value: string }) => newParams = newParams.append(update.param, update.value));
+        });
+        return newParams;
+    }
+
+    static getFilterParams(object: Object): HttpParams {
+        let httpParams = new HttpParams();
+        Object.keys(object).forEach(key => {
+            const value: string = object[key];
+            if (value) {
+                httpParams = httpParams.append(key, value);
+            }
+        });
+        return httpParams;
+    }
+
+    static getTableParams(table: Table): HttpParams {
+        let httpParams = new HttpParams();
         if (table == null) {
             return httpParams;
         }
