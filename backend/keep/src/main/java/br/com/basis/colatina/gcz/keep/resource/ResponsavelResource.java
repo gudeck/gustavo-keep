@@ -51,15 +51,9 @@ public class ResponsavelResource {
     }
 
     @GetMapping
-    public ResponseEntity<Page<ResponsavelDocument>> findAll(Pageable pageable) {
+    public ResponseEntity<Page<ResponsavelDocument>> findAll(ResponsavelFilter responsavelFilter, Pageable pageable) {
         log.debug("Requisição rest para listar responsáveis");
-        return ResponseEntity.ok(responsavelService.findAll(pageable));
-    }
-
-    @GetMapping("/filter")
-    public ResponseEntity<Page<ResponsavelDocument>> filter(ResponsavelFilter responsavelFilter, Pageable pageable) {
-        log.debug("Requisição rest para listar responsáveis");
-        return ResponseEntity.ok(responsavelDocumentService.filter(responsavelFilter, pageable));
+        return ResponseEntity.ok(responsavelDocumentService.findAll(responsavelFilter, pageable));
     }
 
     @PutMapping

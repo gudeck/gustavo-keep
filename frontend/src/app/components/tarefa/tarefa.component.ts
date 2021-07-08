@@ -19,7 +19,7 @@ export class TarefaComponent implements AfterViewInit {
     }
 
     findAllTarefas(): void {
-        this.tarefaService.findAll<Page<TarefaList>>(this.tabelaTarefas)
+        this.tarefaService.findAll<Page<TarefaList>>(new TarefaList(), this.tabelaTarefas)
             .subscribe(tarefas => this.tarefas = tarefas);
     }
 

@@ -4,6 +4,7 @@ services:
     container_name: keep_postgres
     ports:
       - 5432:5432
+    mem_limit: 1024M
     environment:
       POSTGRES_PASSWORD: admin
       POSTGRES_USER: admin

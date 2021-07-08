@@ -2,7 +2,7 @@
     <div class="p-grid ui-fluid">
         <div class="p-col-12">
             <p-fieldset legend="Filtros">
-                <form #formFilter="ngForm" (ngSubmit)="search(formFilter)">
+                <form (ngSubmit)="filterResponsaveis()">
                     <div class="ui-fluid p-formgrid p-grid p-align-center vertical-container">
                         <div class="p-field p-lg-3 p-md-6 p-sm-12">
                             <label for="inputNome">Nome</label>
@@ -25,25 +25,27 @@
             </p-fieldset>
         </div>
         <div class="p-col-12">
-            <p-table #tableResponsaveis (onPage)="findAllResponsaveis()" [lazy]="true"
-                     [paginator]="true" [responsive]="true" [rowsPerPageOptions]="[20,40,60]" [rows]="20"
-                     [totalRecords]="responsaveis.totalElements" [value]="responsaveis.content" dataKey="id"
-                     selectionMode="single"
-                     sortField="id">
+            <p-table #tableResponsaveis (onPage)="findAllResponsaveis()"
+                     (onSort)="findAllResponsaveis(responsavelFilter)" [lazy]="true" [paginator]="true"
+                     [responsive]="true" [rowsPerPageOptions]="[2,4,6]" [rows]="2"
+                     [totalRecords]="responsaveis?.totalElements" [value]="responsaveis?.content" dataKey="id"
+                     selectionMode="single" sortField="id">
 
                 <ng-template pTemplate="header">
                     <tr>
-                        <th class="width-50-percent" scope="col">Nome</th>
-                        <th class="width-30-percent" scope="col">Email</th>
-                        <th class="width-20-percent" scope="col">Data de Nascimento</th>
+                        <th class="width-50-percent" pSortableColumn="nome.keyword" scope="col">Nome</th>
+                        <th class="width-30-percent" pSortableColumn="email.keyword" scope="col">Email</th>
+                        <th class="width-20-percent" pSortableColumn="dataNascimento" scope="col">
+                            Data de Nascimento
+                        </th>
                     </tr>
                 </ng-template>
 
                 <ng-template let-responsavel pTemplate="body">
                     <tr>
-                        <td>{{responsavel.nome}}</td>
-                        <td>{{responsavel.email}}</td>
-                        <td>{{responsavel.dataNascimento | date: 'dd/MM/yyyy'}}</td>
+                        <td>{{responsavel['nome']}}</td>
+                        <td>{{responsavel['email']}}</td>
+                        <td>{{responsavel['dataNascimento'] | date: 'dd/MM/yyyy'}}</td>
                     </tr>
                 </ng-template>
 

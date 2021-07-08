@@ -16,7 +16,4 @@ export class AppTopbarComponent {
         return this._authentication.getUser();
     }
 
-    isAuthenticated() {
-        return this._authentication.isAuthenticated();
-    }
 }

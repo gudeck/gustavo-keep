@@ -22,13 +22,9 @@ export abstract class AbstractService {
         return this.http.delete<void>(`${ this.baseUrl }/${ id }`);
     }
 
-    filter<T>(object: Object, table: Table): Observable<T> {
-        return this.http.get<T>(`${ this.baseUrl }/filter`,
+    findAll<T>(object: Object, table: Table): Observable<T> {
+        return this.http.get<T>(`${ this.baseUrl }/`,
             { params: RequestUtil.concatParams([RequestUtil.getFilterParams(object), RequestUtil.getTableParams(table)]) });
-    }
-
-    findAll<T>(table: Table): Observable<T> {
-        return this.http.get<T>(`${ this.baseUrl }/`, { params: RequestUtil.getTableParams(table) });
     }
 
     findById<T>(id: number | string): Observable<T> {

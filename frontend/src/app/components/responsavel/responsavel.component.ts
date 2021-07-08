@@ -1,5 +1,4 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { Table } from 'primeng';
 import { Page } from '../../shared/model/page';
 import { ResponsavelFilter } from './model/responsavel-filter';
@@ -21,17 +20,17 @@ export class ResponsavelComponent implements AfterViewInit {
     constructor(private responsavelService: ResponsavelService) {
     }
 
-    findAllResponsaveis(): void {
-        this.responsavelService.findAll<Page<ResponsavelList>>(this.tableResponsaveis)
+    filterResponsaveis(responsavelFilter = this.responsavelFilter): void {
+        this.tableResponsaveis.reset();
+        this.findAllResponsaveis(responsavelFilter);
+    }
+
+    findAllResponsaveis(filter = this.responsavelFilter, table = this.tableResponsaveis): void {
+        this.responsavelService.findAll<Page<ResponsavelList>>(filter, table)
             .subscribe((responsaveis) => this.responsaveis = responsaveis);
     }
 
     ngAfterViewInit(): void {
         this.findAllResponsaveis();
-    }
-
-    search(formFilter: NgForm): void {
-        this.responsavelService.filter<Page<ResponsavelList>>(formFilter.value, this.tableResponsaveis)
-            .subscribe((responsaveis) => this.responsaveis = responsaveis);
     }
 }

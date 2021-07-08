@@ -4,15 +4,13 @@ import { Table } from 'primeng';
 export class RequestUtil {
 
     static concatParams(params: HttpParams[]): HttpParams {
-        let newParams = new HttpParams();
+        let httpParams = new HttpParams();
         params.forEach(param => {
             param['updates']
-                .map(update => {
-                    return { param: update['param'], value: update['value'] };
-                })
-                .forEach((update: { param: string, value: string }) => newParams = newParams.append(update.param, update.value));
+                ?.map(update => ({ param: update['param'], value: update['value'] }))
+                .forEach((update: { param: string, value: string }) => httpParams = httpParams.append(update.param, update.value));
         });
-        return newParams;
+        return httpParams;
     }
 
     static getFilterParams(object: Object): HttpParams {

@@ -22,7 +22,9 @@ public class ResponsavelDocument {
 
     @Id
     private Long id;
+
     private String nome;
+
     private String email;
 
     @Field(type = Date, format = date)
