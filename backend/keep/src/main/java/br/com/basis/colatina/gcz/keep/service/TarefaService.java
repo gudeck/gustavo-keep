@@ -1,5 +1,6 @@
 package br.com.basis.colatina.gcz.keep.service;
 
+import br.com.basis.colatina.gcz.keep.domain.Tarefa;
 import br.com.basis.colatina.gcz.keep.repository.TarefaRepository;
 import br.com.basis.colatina.gcz.keep.service.dto.TarefaDTO;
 import br.com.basis.colatina.gcz.keep.service.event.TarefaEvent;
@@ -10,6 +11,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
+
+import static java.util.stream.Collectors.toSet;
 
 @Service
 @RequiredArgsConstructor
@@ -41,6 +46,13 @@ public class TarefaService {
         var tarefa = tarefaRepository.save(tarefaMapper.toEntity(tarefaDTO));
         applicationEventPublisher.publishEvent(new TarefaEvent(tarefa.getId()));
         return tarefaMapper.toDto(tarefa);
+    }
+
+    public void saveAll(List<TarefaDTO> tarefaDTO) {
+        var idsTarefas = tarefaRepository.saveAll(tarefaMapper.toEntity(tarefaDTO)).stream()
+                .map(Tarefa::getId)
+                .collect(toSet());
+        applicationEventPublisher.publishEvent(new TarefaEvent(idsTarefas));
     }
 
 }

@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.util.List;
+
 @Slf4j
 @RequiredArgsConstructor
 @RestController
@@ -35,6 +37,13 @@ public class TarefaResource {
         TarefaDTO tarefa = tarefaService.save(tarefaDTO);
         var uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{idTarefa}").buildAndExpand(tarefa.getId()).toUri();
         return ResponseEntity.created(uri).build();
+    }
+
+    @PostMapping("/bulk")
+    public ResponseEntity<Void> bulkCreate(@RequestBody List<TarefaDTO> tarefasDTO) {
+        log.debug("Requisição rest para criação de uma tarefa com os dados: {}", tarefasDTO);
+        tarefaService.saveAll(tarefasDTO);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{idTarefa}")

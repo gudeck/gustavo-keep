@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.util.List;
+
 @Slf4j
 @RequiredArgsConstructor
 @RestController
@@ -35,6 +37,13 @@ public class ResponsavelResource {
         ResponsavelDTO responsavel = responsavelService.save(responsavelDTO);
         var uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{idResponsavel}").buildAndExpand(responsavel.getId()).toUri();
         return ResponseEntity.created(uri).build();
+    }
+
+    @PostMapping("/bulk")
+    public ResponseEntity<Void> bulkCreate(@RequestBody List<ResponsavelDTO> responsaveisDTO) {
+        log.debug("Requisição rest para criação de um responsável com os dados: {}", responsaveisDTO);
+        responsavelService.saveAll(responsaveisDTO);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{idResponsavel}")

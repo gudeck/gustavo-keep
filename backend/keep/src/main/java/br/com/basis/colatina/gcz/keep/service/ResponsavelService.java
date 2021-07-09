@@ -1,5 +1,6 @@
 package br.com.basis.colatina.gcz.keep.service;
 
+import br.com.basis.colatina.gcz.keep.domain.Responsavel;
 import br.com.basis.colatina.gcz.keep.repository.ResponsavelRepository;
 import br.com.basis.colatina.gcz.keep.service.dto.ResponsavelDTO;
 import br.com.basis.colatina.gcz.keep.service.event.ResponsavelEvent;
@@ -10,6 +11,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
+
+import static java.util.stream.Collectors.toSet;
 
 @Service
 @RequiredArgsConstructor
@@ -36,6 +41,13 @@ public class ResponsavelService {
         var responsavel = responsavelRepository.save(responsavelMapper.toEntity(responsavelDTO));
         applicationEventPublisher.publishEvent(new ResponsavelEvent(responsavel.getId()));
         return responsavelMapper.toDto(responsavel);
+    }
+
+    public void saveAll(List<ResponsavelDTO> responsavelDTO) {
+        var idsResponsaveis = responsavelRepository.saveAll(responsavelMapper.toEntity(responsavelDTO)).stream()
+                .map(Responsavel::getId)
+                .collect(toSet());
+        applicationEventPublisher.publishEvent(new ResponsavelEvent(idsResponsaveis));
     }
 
 }

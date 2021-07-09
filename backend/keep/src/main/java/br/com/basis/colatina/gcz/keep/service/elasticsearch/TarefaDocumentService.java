@@ -14,7 +14,10 @@ import org.springframework.data.elasticsearch.core.SearchHit;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.event.TransactionalEventListener;
 
+import java.util.Set;
+
 import static java.util.stream.Collectors.toList;
+import static org.springframework.util.ObjectUtils.isEmpty;
 
 @RequiredArgsConstructor
 @Service
@@ -38,9 +41,26 @@ public class TarefaDocumentService {
     public void indexTarefa(TarefaEvent event) {
         var idEvent = event.getId();
 
+        if (isEmpty(event.getIds())) {
+            indexDocument(idEvent);
+        } else {
+            indexDocuments(event.getIds());
+        }
+    }
+
+    private void indexDocument(Long idEvent) {
         tarefaRepository.getDocument(idEvent).ifPresentOrElse(
                 tarefaDocumentRepository::save,
                 () -> tarefaDocumentRepository.deleteById(idEvent));
     }
 
+    private void indexDocuments(Set<Long> idsEvents) {
+        var documents = tarefaRepository.getDocuments(idsEvents);
+
+        if (isEmpty(documents)) {
+            tarefaDocumentRepository.deleteAllById(idsEvents);
+        } else {
+            tarefaDocumentRepository.saveAll(documents);
+        }
+    }
 }

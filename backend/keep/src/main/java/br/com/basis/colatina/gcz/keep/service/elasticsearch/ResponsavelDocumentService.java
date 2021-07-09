@@ -14,7 +14,10 @@ import org.springframework.data.elasticsearch.core.SearchHit;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.event.TransactionalEventListener;
 
+import java.util.Set;
+
 import static java.util.stream.Collectors.toList;
+import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 @RequiredArgsConstructor
 @Service
@@ -38,9 +41,27 @@ public class ResponsavelDocumentService {
     public void indexResponsavel(ResponsavelEvent event) {
         var idEvent = event.getId();
 
+        if (isEmpty(event.getIds())) {
+            indexDocument(idEvent);
+        } else {
+            indexDocuments(event.getIds());
+        }
+    }
+
+    private void indexDocument(Long idEvent) {
         responsavelRepository.getDocument(idEvent).ifPresentOrElse(
                 responsavelDocumentRepository::save,
                 () -> responsavelDocumentRepository.deleteById(idEvent));
+    }
+
+    private void indexDocuments(Set<Long> idsEvents) {
+        var documents = responsavelRepository.getDocuments(idsEvents);
+
+        if (isEmpty(documents)) {
+            responsavelDocumentRepository.deleteAllById(idsEvents);
+        } else {
+            responsavelDocumentRepository.saveAll(documents);
+        }
     }
 
 }
