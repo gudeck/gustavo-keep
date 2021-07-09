@@ -7,6 +7,8 @@ import org.springframework.data.elasticsearch.core.query.CriteriaQuery;
 
 import java.time.LocalDate;
 
+import static org.apache.commons.lang3.StringUtils.defaultIfBlank;
+
 @Getter
 @Setter
 public class TarefaFilter implements BaseFilter {
@@ -36,10 +38,10 @@ public class TarefaFilter implements BaseFilter {
         criteria = addEquals(criteria, "dataFimPrevista", dataFimPrevista);
         criteria = addEquals(criteria, "dataInicio", dataInicio);
         criteria = addEquals(criteria, "dataFim", dataFim);
-        criteria = addBetween(criteria, "dataInicioPrevista", dataInicioPrevistaPeriodo, maxDate);
-        criteria = addBetween(criteria, "dataFimPrevista", minDate, dataFimPrevistaPeriodo);
-        criteria = addBetween(criteria, "dataInicio", dataInicioPeriodo, maxDate);
-        criteria = addBetween(criteria, "dataFim", minDate, dataFimPeriodo);
+        criteria = addBetween(criteria, "dataInicioPrevista", dataInicioPrevistaPeriodo, defaultIfBlank(dataFimPrevistaPeriodo, maxDate));
+        criteria = addBetween(criteria, "dataFimPrevista", defaultIfBlank(dataInicioPrevistaPeriodo, minDate), dataFimPrevistaPeriodo);
+        criteria = addBetween(criteria, "dataInicio", dataInicioPeriodo, defaultIfBlank(dataFimPeriodo, maxDate));
+        criteria = addBetween(criteria, "dataFim", defaultIfBlank(dataInicioPeriodo, minDate), dataFimPeriodo);
         return new CriteriaQuery(criteria);
     }
 }
