@@ -1,6 +1,8 @@
 export class TarefaList {
+    id: number;
+    idResponsavel: number;
+    responsavel: string;
     titulo: string;
-    nomeResponsavel: string;
     tipo: string;
     dataInicioPrevista: Date;
     dataFimPrevista: Date;

@@ -3,6 +3,8 @@ package br.com.basis.colatina.gcz.keep.resource;
 import br.com.basis.colatina.gcz.keep.domain.document.TarefaDocument;
 import br.com.basis.colatina.gcz.keep.service.TarefaService;
 import br.com.basis.colatina.gcz.keep.service.dto.TarefaDTO;
+import br.com.basis.colatina.gcz.keep.service.elasticsearch.TarefaDocumentService;
+import br.com.basis.colatina.gcz.keep.service.filter.TarefaFilter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -25,6 +27,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 public class TarefaResource {
 
     private final TarefaService tarefaService;
+    private final TarefaDocumentService tarefaDocumentService;
 
     @PostMapping
     public ResponseEntity<TarefaDTO> create(@RequestBody TarefaDTO tarefaDTO) {
@@ -48,9 +51,9 @@ public class TarefaResource {
     }
 
     @GetMapping
-    public ResponseEntity<Page<TarefaDocument>> findAll(Pageable pageable) {
+    public ResponseEntity<Page<TarefaDocument>> findAll(TarefaFilter tarefaFilter, Pageable pageable) {
         log.debug("Requisição rest para listar tarefas");
-        return ResponseEntity.ok(tarefaService.findAll(pageable));
+        return ResponseEntity.ok(tarefaDocumentService.findAll(tarefaFilter, pageable));
     }
 
     @PutMapping

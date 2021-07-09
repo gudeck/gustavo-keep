@@ -5,16 +5,16 @@
                 <form (ngSubmit)="filterResponsaveis()">
                     <div class="ui-fluid p-formgrid p-grid p-align-center vertical-container">
                         <div class="p-field p-lg-3 p-md-6 p-sm-12">
-                            <label for="inputNome">Nome</label>
-                            <input [(ngModel)]="responsavelFilter.nome" id="inputNome" name="nome" pInputText>
+                            <label for="input-nome">Nome</label>
+                            <input [(ngModel)]="responsavelFilter.nome" id="input-nome" name="nome" pInputText>
                         </div>
                         <div class="p-field p-lg-3 p-md-6 p-sm-12">
-                            <label for="inputEmail">Email</label>
-                            <input [(ngModel)]="responsavelFilter.email" id="inputEmail" name="email" pInputText>
+                            <label for="input-email">Email</label>
+                            <input [(ngModel)]="responsavelFilter.email" id="input-email" name="email" pInputText>
                         </div>
                         <div class="p-field p-lg-3 p-md-6 p-sm-12">
-                            <label for="inputDataNascimento">Data de Nascimento</label>
-                            <input [(ngModel)]="responsavelFilter.dataNascimento" id="inputDataNascimento"
+                            <label for="input-data-nascimento">Data de Nascimento</label>
+                            <input [(ngModel)]="responsavelFilter.dataNascimento" id="input-data-nascimento"
                                    max="9999-12-31" name="dataNascimento" pInputText type="date">
                         </div>
                         <div class="p-lg-3 p-md-6 p-sm-12">
@@ -27,7 +27,7 @@
         <div class="p-col-12">
             <p-table #tableResponsaveis (onPage)="findAllResponsaveis()"
                      (onSort)="findAllResponsaveis(responsavelFilter)" [lazy]="true" [paginator]="true"
-                     [responsive]="true" [rowsPerPageOptions]="[2,4,6]" [rows]="2"
+                     [responsive]="true" [rowsPerPageOptions]="[20,40,60]" [rows]="20"
                      [totalRecords]="responsaveis?.totalElements" [value]="responsaveis?.content" dataKey="id"
                      selectionMode="single" sortField="id">
 

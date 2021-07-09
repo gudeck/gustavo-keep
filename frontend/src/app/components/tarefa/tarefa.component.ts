@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { Table } from 'primeng';
 import { Page } from '../../shared/model/page';
+import { TarefaFilter } from './model/tarefa-filter';
 import { TarefaList } from './model/tarefa-list';
 import { TarefaService } from './service/tarefa.service';
 
@@ -12,19 +13,23 @@ export class TarefaComponent implements AfterViewInit {
 
     @ViewChild('tableTarefas') tabelaTarefas: Table;
 
-    tarefaSelecionada: TarefaList;
+    tarefaFilter = new TarefaFilter();
     tarefas = new Page<TarefaList>();
 
     constructor(private tarefaService: TarefaService) {
     }
 
-    findAllTarefas(): void {
-        this.tarefaService.findAll<Page<TarefaList>>(new TarefaList(), this.tabelaTarefas)
+    filterTarefas(tarefaFilter = this.tarefaFilter): void {
+        this.tabelaTarefas.reset();
+        this.findAllTarefas(tarefaFilter);
+    }
+
+    findAllTarefas(filter = this.tarefaFilter, table = this.tabelaTarefas): void {
+        this.tarefaService.findAll<Page<TarefaList>>(filter, table)
             .subscribe(tarefas => this.tarefas = tarefas);
     }
 
     ngAfterViewInit(): void {
         this.findAllTarefas();
     }
-
 }

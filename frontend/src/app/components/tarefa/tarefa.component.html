@@ -1,29 +1,124 @@
-<p-table #tableTarefas (onPage)="findAllTarefas()" [(selection)]="tarefaSelecionada" [lazy]="true" [paginator]="true"
-         [responsive]="true" [rowsPerPageOptions]="[20,40,60]" [rows]="20" [totalRecords]="tarefas.totalElements"
-         [value]="tarefas.content" dataKey="id" selectionMode="single" sortField="id">
+<p-card>
+    <div class="p-grid ui-fluid">
+        <div class="p-col-12">
+            <p-fieldset legend="Filtros">
+                <form (ngSubmit)="filterTarefas()">
+                    <div class="ui-fluid p-formgrid p-grid p-justify-center">
+                        <div class="p-field p-lg-4 p-md-6 p-sm-12">
+                            <label for="input-titulo">Título</label>
+                            <input [(ngModel)]="tarefaFilter.titulo" id="input-titulo" name="titulo" pInputText>
+                        </div>
+                        <div class="p-field p-lg-4 p-md-6 p-sm-12">
+                            <label for="input-responsavel">Responsável</label>
+                            <input [(ngModel)]="tarefaFilter.responsavel" id="input-responsavel" name="responsavel"
+                                   pInputText>
+                        </div>
+                        <div class="p-field p-lg-4 p-md-6 p-sm-12">
+                            <label for="input-tipo">Tipo</label>
+                            <input [(ngModel)]="tarefaFilter.tipo" id="input-tipo" name="tipo" pInputText>
+                        </div>
+                        <div class="p-lg-6 p-md-12 p-sm-12">
+                            <p-fieldset legend="Datas Previstas">
+                                <div class="ui-fluid p-formgrid p-grid p-justify-center">
+                                    <div class="p-col-12 text-align-center"><h3>Exato</h3></div>
+                                    <div class="p-field p-lg-6 p-md-6 p-sm-12">
+                                        <label for="input-inicio-previsto">Início Previsto</label>
+                                        <input [(ngModel)]="tarefaFilter.dataInicioPrevista" id="input-inicio-previsto"
+                                               max="9999-12-31" name="dataInicioPrevista" pInputText
+                                               type="date">
+                                    </div>
+                                    <div class="p-field p-lg-6 p-md-6 p-sm-12">
+                                        <label for="input-fim-previsto">Fim Previsto</label>
+                                        <input [(ngModel)]="tarefaFilter.dataFimPrevista" id="input-fim-previsto"
+                                               max="9999-12-31" name="dataFimPrevista" pInputText type="date">
+                                    </div>
+                                    <div class="p-col-12 text-align-center"><h3>Período</h3></div>
+                                    <div class="p-field p-lg-6 p-md-6 p-sm-12">
+                                        <label for="input-inicio-previsto-periodo">Data Mínima de Início</label>
+                                        <input [(ngModel)]="tarefaFilter.dataInicioPrevistaPeriodo"
+                                               id="input-inicio-previsto-periodo"
+                                               max="9999-12-31" name="dataInicioPrevistaPeriodo" pInputText
+                                               type="date">
+                                    </div>
+                                    <div class="p-field p-lg-6 p-md-6 p-sm-12">
+                                        <label for="input-fim-previsto-periodo">Data Máxima de Fim</label>
+                                        <input [(ngModel)]="tarefaFilter.dataFimPrevistaPeriodo"
+                                               id="input-fim-previsto-periodo"
+                                               max="9999-12-31" name="dataFimPrevistaPeriodo" pInputText
+                                               type="date">
+                                    </div>
+                                </div>
+                            </p-fieldset>
+                        </div>
+                        <div class="p-lg-6 p-md-12 p-sm-12">
+                            <p-fieldset legend="Datas Execução">
+                                <div class="ui-fluid p-formgrid p-grid p-justify-center">
+                                    <div class="p-col-12 text-align-center"><h3>Exato</h3></div>
+                                    <div class="p-field p-lg-6 p-md-6 p-sm-12">
+                                        <label for="input-inicio">Início </label>
+                                        <input [(ngModel)]="tarefaFilter.dataInicio" id="input-inicio"
+                                               max="9999-12-31" name="dataInicio" pInputText type="date">
+                                    </div>
+                                    <div class="p-field p-lg-6 p-md-6 p-sm-12">
+                                        <label for="input-fim">Fim </label>
+                                        <input [(ngModel)]="tarefaFilter.dataFim" id="input-fim"
+                                               max="9999-12-31" name="dataFim" pInputText type="date">
+                                    </div>
+                                    <div class="p-col-12 text-align-center"><h3>Período</h3></div>
+                                    <div class="p-field p-lg-6 p-md-6 p-sm-12">
+                                        <label for="input-inicio-periodo">Data Mínima de Início</label>
+                                        <input [(ngModel)]="tarefaFilter.dataInicioPeriodo" id="input-inicio-periodo"
+                                               max="9999-12-31" name="dataInicioPeriodo" pInputText
+                                               type="date">
+                                    </div>
+                                    <div class="p-field p-lg-6 p-md-6 p-sm-12">
+                                        <label for="input-fim-periodo">Data Máxima de Fim</label>
+                                        <input [(ngModel)]="tarefaFilter.dataFimPeriodo" id="input-fim-periodo"
+                                               max="9999-12-31" name="dataFimPeriodo" pInputText type="date">
+                                    </div>
+                                </div>
+                            </p-fieldset>
+                        </div>
+                        <div class="p-lg-3 p-md-6 p-sm-12">
+                            <button icon="pi pi-search" label="Buscar" pButton></button>
+                        </div>
+                    </div>
+                </form>
+            </p-fieldset>
+        </div>
+        <div class="p-col-12">
+            <p-table #tableTarefas (onPage)="findAllTarefas()" (onSort)="findAllTarefas()" [lazy]="true"
+                     [paginator]="true"
+                     [responsive]="true" [rowsPerPageOptions]="[20,40,60]" [rows]="20"
+                     [totalRecords]="tarefas?.totalElements" [value]="tarefas?.content" dataKey="id"
+                     selectionMode="single"
+                     sortField="id">
 
-    <ng-template pTemplate="header">
-        <tr>
-            <th scope="col">Titulo</th>
-            <th scope="col">Responsável</th>
-            <th scope="col">Tipo</th>
-            <th scope="col">Início Previsto</th>
-            <th scope="col">Fim Previsto</th>
-            <th scope="col">Início</th>
-            <th scope="col">Fim</th>
-        </tr>
-    </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pSortableColumn="titulo.keyword" scope="col" style="width: 30%">Titulo</th>
+                        <th pSortableColumn="responsavel.keyword" scope="col" style="width: 15%">Responsável</th>
+                        <th pSortableColumn="tipo.keyword" scope="col" style="width: 10%">Tipo</th>
+                        <th pSortableColumn="dataInicioPrevista" scope="col" style="width: 5%">Início Previsto</th>
+                        <th pSortableColumn="dataFimPrevista" scope="col" style="width: 5%">Fim Previsto</th>
+                        <th pSortableColumn="dataInicio" scope="col" style="width: 5%">Início</th>
+                        <th pSortableColumn="dataFim" scope="col" style="width: 5%">Fim</th>
+                    </tr>
+                </ng-template>
 
-    <ng-template let-tarefa pTemplate="body">
-        <tr [pSelectableRow]="tarefa">
-            <td>{{tarefa.titulo}}</td>
-            <td>{{tarefa.nomeResponsavel}}</td>
-            <td>{{tarefa.tipo}}</td>
-            <td>{{tarefa.dataInicioPrevista | date: 'dd/MM/yyyy'}}</td>
-            <td>{{tarefa.dataFimPrevista | date: 'dd/MM/yyyy'}}</td>
-            <td>{{tarefa.dataInicio | date: 'dd/MM/yyyy'}}</td>
-            <td>{{tarefa.dataFim | date: 'dd/MM/yyyy'}}</td>
-        </tr>
-    </ng-template>
+                <ng-template let-tarefa pTemplate="body">
+                    <tr>
+                        <td>{{tarefa.titulo}}</td>
+                        <td>{{tarefa.responsavel}}</td>
+                        <td>{{tarefa.tipo}}</td>
+                        <td>{{tarefa.dataInicioPrevista | date: 'dd/MM/yyyy'}}</td>
+                        <td>{{tarefa.dataFimPrevista | date: 'dd/MM/yyyy'}}</td>
+                        <td>{{tarefa.dataInicio | date: 'dd/MM/yyyy'}}</td>
+                        <td>{{tarefa.dataFim | date: 'dd/MM/yyyy'}}</td>
+                    </tr>
+                </ng-template>
 
-</p-table>
+            </p-table>
+        </div>
+    </div>
+</p-card>

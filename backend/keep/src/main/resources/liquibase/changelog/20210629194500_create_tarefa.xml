@@ -26,19 +26,19 @@
                 <constraints nullable="false"/>
             </column>
 
-            <column type="datetime" name="data_inicio_prevista">
+            <column type="date" name="data_inicio_prevista">
                 <constraints nullable="false"/>
             </column>
 
-            <column type="datetime" name="data_fim_prevista">
+            <column type="date" name="data_fim_prevista">
                 <constraints nullable="false"/>
             </column>
 
             <column type="integer" name="tempo_previsto"/>
             <column type="integer" name="tempo_gasto"/>
 
-            <column type="datetime" name="data_inicio"/>
-            <column type="datetime" name="data_fim"/>
+            <column type="date" name="data_inicio"/>
+            <column type="date" name="data_fim"/>
         </createTable>
     </changeSet>
 

@@ -1,20 +1,17 @@
 package br.com.basis.colatina.gcz.keep.domain;
 
-import br.com.basis.colatina.gcz.keep.domain.enumeration.TipoTarefaEnum;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
-import static javax.persistence.EnumType.STRING;
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.SEQUENCE;
 
@@ -37,22 +34,21 @@ public class Tarefa {
 
     private String descricao;
 
-    @Enumerated(STRING)
     @Column(nullable = false)
-    private TipoTarefaEnum tipo;
+    private String tipo;
 
     @Column(nullable = false)
-    private LocalDateTime dataInicioPrevista;
+    private LocalDate dataInicioPrevista;
 
     @Column(nullable = false)
-    private LocalDateTime dataFimPrevista;
+    private LocalDate dataFimPrevista;
 
     private Integer tempoPrevisto;
 
     private Integer tempoGasto;
 
-    private LocalDateTime dataInicio;
+    private LocalDate dataInicio;
 
-    private LocalDateTime dataFim;
+    private LocalDate dataFim;
 
 }
