@@ -12,7 +12,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.SearchHit;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.event.TransactionalEventListener;
 
 import static java.util.stream.Collectors.toList;
@@ -26,7 +25,6 @@ public class ResponsavelDocumentService {
 
     private final ElasticsearchOperations elasticsearchOperations;
 
-    @Transactional(readOnly = true)
     public Page<ResponsavelDocument> findAll(ResponsavelFilter responsavelFilter, Pageable pageable) {
         var resultado = elasticsearchOperations.search(responsavelFilter.getPagedQuery(pageable), ResponsavelDocument.class).stream()
                 .map(SearchHit::getContent)
